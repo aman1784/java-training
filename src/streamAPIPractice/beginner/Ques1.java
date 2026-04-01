@@ -1,20 +1,18 @@
-package streamAPIPractice.basicquestions;
+package streamAPIPractice.beginner;
 
 import streamAPIPractice.Order;
 
 import java.time.LocalDate;
 import java.util.List;
 
-// Problem:
-// Check if any order is CANCELLED
-//
+// Problem Statement:
+// Get a list of customer names who have placed orders with amount greater than 1000.
+
 // Expected Concepts:
-// -> anyMatch()
-public class Ques9 {
-
-    private static final String CANCELLED_STATUS = "CANCELLED";
-
-    public static void main(String[] args) {
+// -> filter
+// -> map
+public class Ques1 {
+    static void main(String[] args) {
         List<Order> orders = List.of(
                 new Order(1, "Aman", 1200, "DELIVERED", LocalDate.now().minusDays(2), List.of("Laptop", "Mouse")),
                 new Order(2, "Rahul", 800, "PLACED", LocalDate.now().minusDays(1), List.of("Keyboard")),
@@ -23,9 +21,13 @@ public class Ques9 {
                 new Order(5, "Rahul", 500, "CANCELLED", LocalDate.now().minusDays(4), List.of("Cable"))
         );
 
-        boolean isAnyOrderCancel = orders.stream()
-                .anyMatch(order -> CANCELLED_STATUS.equals(order.getStatus()));
+        double threshold = 1000;
 
-        System.out.println("Is any order cancelled: " + isAnyOrderCancel);
+        List<String> customerNames = orders.stream()
+                .filter(order -> order.getAmount() > threshold)
+                .map(Order::getCustomerName)
+                .toList();
+
+        System.out.println(customerNames);
     }
 }

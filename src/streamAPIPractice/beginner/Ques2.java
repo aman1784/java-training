@@ -1,20 +1,22 @@
-package streamAPIPractice.basicquestions;
-
-// Problem:
-// Find all orders where amount > 1000
-//
-// Expected Concepts:
-// stream()
-// filter()
-// collect()
+package streamAPIPractice.beginner;
 
 import streamAPIPractice.Order;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class Ques0 {
-    public static void main(String[] args) {
+// Problem Statement:
+// Get the total amount of all DELIVERED orders
+
+// Expected Concepts:
+// -> filter
+// -> map
+// -> sum
+public class Ques2 {
+
+    private static final String DELIVERED_STATUS = "DELIVERED";
+
+    static void main(String[] args) {
         List<Order> orders = List.of(
                 new Order(1, "Aman", 1200, "DELIVERED", LocalDate.now().minusDays(2), List.of("Laptop", "Mouse")),
                 new Order(2, "Rahul", 800, "PLACED", LocalDate.now().minusDays(1), List.of("Keyboard")),
@@ -23,12 +25,11 @@ public class Ques0 {
                 new Order(5, "Rahul", 500, "CANCELLED", LocalDate.now().minusDays(4), List.of("Cable"))
         );
 
-        double thresholdAmount = 1000;
+        double totalAmount = orders.stream()
+                .filter(order -> DELIVERED_STATUS.equals(order.getStatus()))
+                .mapToDouble(Order::getAmount)
+                .sum();
 
-        List<Order> filteredOrders = orders.stream()
-                .filter(order -> order.getAmount() > thresholdAmount)
-                .toList();
-
-        filteredOrders.forEach(System.out::println);
+        System.out.println(totalAmount);
     }
 }

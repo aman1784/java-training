@@ -1,4 +1,4 @@
-package streamAPIPractice.basicquestions;
+package streamAPIPractice.beginner;
 
 // Problem:
 // Check if any order is status "CANCELLED"

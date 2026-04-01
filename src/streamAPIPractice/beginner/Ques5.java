@@ -1,4 +1,4 @@
-package streamAPIPractice.basicquestions;
+package streamAPIPractice.beginner;
 
 import streamAPIPractice.Order;
 
@@ -6,17 +6,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 // Problem Statement:
-// Get the total amount of all DELIVERED orders
+// Check if any order has amount greater than 1500
 
 // Expected Concepts:
-// -> filter
-// -> map
-// -> sum
-public class Ques2 {
-
-    private static final String DELIVERED_STATUS = "DELIVERED";
-
-    static void main(String[] args) {
+// -> anyMatch
+public class Ques5 {
+    static void main() {
         List<Order> orders = List.of(
                 new Order(1, "Aman", 1200, "DELIVERED", LocalDate.now().minusDays(2), List.of("Laptop", "Mouse")),
                 new Order(2, "Rahul", 800, "PLACED", LocalDate.now().minusDays(1), List.of("Keyboard")),
@@ -25,11 +20,11 @@ public class Ques2 {
                 new Order(5, "Rahul", 500, "CANCELLED", LocalDate.now().minusDays(4), List.of("Cable"))
         );
 
-        double totalAmount = orders.stream()
-                .filter(order -> DELIVERED_STATUS.equals(order.getStatus()))
-                .mapToDouble(Order::getAmount)
-                .sum();
+        double thresholdAmount = 1500;
 
-        System.out.println(totalAmount);
+        boolean orderAmountGreaterThan1500 = orders.stream()
+                .anyMatch(order -> order.getAmount() > thresholdAmount);
+
+        System.out.println("Order Amount Greater than 1500: " + orderAmountGreaterThan1500);
     }
 }

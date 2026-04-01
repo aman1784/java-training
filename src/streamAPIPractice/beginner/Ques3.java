@@ -1,4 +1,4 @@
-package streamAPIPractice.basicquestions;
+package streamAPIPractice.beginner;
 
 import streamAPIPractice.Order;
 
@@ -6,11 +6,15 @@ import java.time.LocalDate;
 import java.util.List;
 
 // Problem Statement:
-// Check if any order has amount greater than 1500
+// Get a list of order IDs where status is "DELIVERED"
 
 // Expected Concepts:
-// -> anyMatch
-public class Ques5 {
+// -> filter
+// -> map
+public class Ques3 {
+
+    private static final String DELIVERED_STATUS = "DELIVERED";
+
     static void main() {
         List<Order> orders = List.of(
                 new Order(1, "Aman", 1200, "DELIVERED", LocalDate.now().minusDays(2), List.of("Laptop", "Mouse")),
@@ -20,11 +24,11 @@ public class Ques5 {
                 new Order(5, "Rahul", 500, "CANCELLED", LocalDate.now().minusDays(4), List.of("Cable"))
         );
 
-        double thresholdAmount = 1500;
+        List<Integer> orderIds = orders.stream()
+                .filter(order -> DELIVERED_STATUS.equals(order.getStatus()))
+                .map(Order::getOrderId)
+                .toList();
 
-        boolean orderAmountGreaterThan1500 = orders.stream()
-                .anyMatch(order -> order.getAmount() > thresholdAmount);
-
-        System.out.println("Order Amount Greater than 1500: " + orderAmountGreaterThan1500);
+        System.out.println(orderIds);
     }
 }

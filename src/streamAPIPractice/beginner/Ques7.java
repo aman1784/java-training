@@ -1,4 +1,4 @@
-package streamAPIPractice.basicquestions;
+package streamAPIPractice.beginner;
 
 import streamAPIPractice.Order;
 
@@ -6,16 +6,14 @@ import java.time.LocalDate;
 import java.util.List;
 
 // Problem Statement:
-// Count how many orders have status "CANCELLED"
-
+// Check if no order has status "CANCELLED"
+//
 // Expected Concepts:
-// -> filter
-// -> count
-public class Ques4 {
-
+// -> noneMatch
+public class Ques7 {
     private static final String CANCELLED_STATUS = "CANCELLED";
 
-    static void main() {
+    public static void main() {
         List<Order> orders = List.of(
                 new Order(1, "Aman", 1200, "DELIVERED", LocalDate.now().minusDays(2), List.of("Laptop", "Mouse")),
                 new Order(2, "Rahul", 800, "PLACED", LocalDate.now().minusDays(1), List.of("Keyboard")),
@@ -24,11 +22,11 @@ public class Ques4 {
                 new Order(5, "Rahul", 500, "CANCELLED", LocalDate.now().minusDays(4), List.of("Cable"))
         );
 
-        long cancelledOrders = orders.stream()
-                .filter(order -> CANCELLED_STATUS.equals(order.getStatus()))
-                .count();
+        boolean hasNoCancelledOrders = orders.stream()
+                // .filter(Objects::nonNull) // Filter out null orders: Add only when data coming from DB or external API. Here not required.
+                .noneMatch(order -> CANCELLED_STATUS.equals(order.getStatus()));
 
-        System.out.println("Cancelled Orders: " + cancelledOrders);
+        System.out.println("Is no order cancelled: " + hasNoCancelledOrders);
 
     }
 }

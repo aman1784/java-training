@@ -1,4 +1,4 @@
-package streamAPIPractice.basicquestions;
+package streamAPIPractice.beginner;
 
 import streamAPIPractice.Order;
 

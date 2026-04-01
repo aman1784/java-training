@@ -1,21 +1,20 @@
-package streamAPIPractice.basicquestions;
+package streamAPIPractice.beginner;
+
+// Problem:
+// Find all orders where amount > 1000
+//
+// Expected Concepts:
+// stream()
+// filter()
+// collect()
 
 import streamAPIPractice.Order;
 
 import java.time.LocalDate;
 import java.util.List;
 
-// Problem Statement:
-// Get a list of order IDs where status is "DELIVERED"
-
-// Expected Concepts:
-// -> filter
-// -> map
-public class Ques3 {
-
-    private static final String DELIVERED_STATUS = "DELIVERED";
-
-    static void main() {
+public class Ques0 {
+    public static void main(String[] args) {
         List<Order> orders = List.of(
                 new Order(1, "Aman", 1200, "DELIVERED", LocalDate.now().minusDays(2), List.of("Laptop", "Mouse")),
                 new Order(2, "Rahul", 800, "PLACED", LocalDate.now().minusDays(1), List.of("Keyboard")),
@@ -24,11 +23,12 @@ public class Ques3 {
                 new Order(5, "Rahul", 500, "CANCELLED", LocalDate.now().minusDays(4), List.of("Cable"))
         );
 
-        List<Integer> orderIds = orders.stream()
-                .filter(order -> DELIVERED_STATUS.equals(order.getStatus()))
-                .map(Order::getOrderId)
+        double thresholdAmount = 1000;
+
+        List<Order> filteredOrders = orders.stream()
+                .filter(order -> order.getAmount() > thresholdAmount)
                 .toList();
 
-        System.out.println(orderIds);
+        filteredOrders.forEach(System.out::println);
     }
 }

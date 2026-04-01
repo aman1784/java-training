@@ -1,20 +1,20 @@
-package streamAPIPractice.basicquestions;
+package streamAPIPractice.beginner;
 
 import streamAPIPractice.Order;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 
-// Problem Statement:
-// Check if no order has status "CANCELLED"
+// Problem:
+// Check if any order is CANCELLED
 //
 // Expected Concepts:
-// -> noneMatch
-public class Ques7 {
+// -> anyMatch()
+public class Ques9 {
+
     private static final String CANCELLED_STATUS = "CANCELLED";
 
-    public static void main() {
+    public static void main(String[] args) {
         List<Order> orders = List.of(
                 new Order(1, "Aman", 1200, "DELIVERED", LocalDate.now().minusDays(2), List.of("Laptop", "Mouse")),
                 new Order(2, "Rahul", 800, "PLACED", LocalDate.now().minusDays(1), List.of("Keyboard")),
@@ -23,11 +23,9 @@ public class Ques7 {
                 new Order(5, "Rahul", 500, "CANCELLED", LocalDate.now().minusDays(4), List.of("Cable"))
         );
 
-        boolean hasNoCancelledOrders = orders.stream()
-                // .filter(Objects::nonNull) // Filter out null orders: Add only when data coming from DB or external API. Here not required.
-                .noneMatch(order -> CANCELLED_STATUS.equals(order.getStatus()));
+        boolean isAnyOrderCancel = orders.stream()
+                .anyMatch(order -> CANCELLED_STATUS.equals(order.getStatus()));
 
-        System.out.println("Is no order cancelled: " + hasNoCancelledOrders);
-
+        System.out.println("Is any order cancelled: " + isAnyOrderCancel);
     }
 }
