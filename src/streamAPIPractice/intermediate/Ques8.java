@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 // Problem:
-// Extract Unique Items: Flatten all items from all orders into a single list: Extract Unique Items
+// Get unique items across all orders
 //
 // Expected Concepts:
 // -> flatMap()
@@ -26,21 +26,5 @@ public class Ques8 {
                 .toList();
 
         System.out.println("Flattened List of Items:" + result);
-
-        System.out.println("==========");
-
-        // Count Total Items: WAY 1
-        long totalItems = orders.stream()
-                .mapToLong(order -> order.getItems().size())
-                .sum();
-
-        System.out.println("Total Items: " + totalItems);
-
-        // Count Total Items: WAY 2
-        long totalItems2 = orders.stream()
-                .flatMap(order -> order.getItems().stream())
-                .count();
-
-        System.out.println("Total Items: " + totalItems2);
     }
 }
