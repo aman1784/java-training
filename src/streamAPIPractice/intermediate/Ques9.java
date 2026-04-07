@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 // Problem:
-// Find Most Ordered Item: Flatten all items from all orders into a single list: Extract Unique Items
+// Find Most Ordered Item
 //
 // Expected Concepts:
 // -> flatMap()
